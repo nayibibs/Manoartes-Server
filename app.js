@@ -22,4 +22,9 @@ app.use("/api", allRoutes);
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
+
+ 
+const artesaniaRouter = require('./routes/artesania.routes'); // <== has to be added
+app.use('/api', artesaniaRouter); // <== has to be added
+
 module.exports = app;
