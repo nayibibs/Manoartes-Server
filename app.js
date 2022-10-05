@@ -19,12 +19,18 @@ require("./config")(app);
 const allRoutes = require("./routes/index.routes");
 app.use("/api", allRoutes);
 
+const artesaniaRouter = require('./routes/artesania.routes'); // <== has to be added
+app.use('/api/artesania', artesaniaRouter); // <== has to be added
+
+//import route product
+const productosBaseRouter = require('./routes/productosBase.routes')
+app.use("/api", productosBaseRouter);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
 
  
-const artesaniaRouter = require('./routes/artesania.routes'); // <== has to be added
-app.use('/api', artesaniaRouter); // <== has to be added
+
 
 module.exports = app;
