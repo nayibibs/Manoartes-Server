@@ -84,6 +84,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
           username,
           password: hashedPassword,
           email,
+          
         });
       })
       .then((user) => {
