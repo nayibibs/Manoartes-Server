@@ -13,8 +13,11 @@ const userSchema = new Schema(
       type: String,
     },
    
+    role:String,
       
     password: String,
+
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
     
    
   },

@@ -8,6 +8,7 @@ const fileUploader = require("../config/cloudinary.config");
 //Routs for all products
 router.get("/productosbase", (req,res) =>{
     ProductosBase.find()
+    .populate("comments")
     .then(productos =>{
         res.json(productos)
     })
@@ -45,11 +46,18 @@ router.post('/productosbase', (req, res) => {
  // GET /api/productosbase/:productosBaseId -> to get the product id
   router.get('/productosbase/:productoId', (req, res) => {
     const { productoId } = req.params;
-   
+    
     if (!mongoose.Types.ObjectId.isValid(productoId)) {
       res.status(400).json({ message: 'Specified id is not valid' });
       return;
     }
+    
+    ProductosBase.findById(productoId)
+    .populate("comments")
+    .then(response=>{
+      return res.json(response)
+    })
+    .catch(error=>{res.status(400).json({message:error.message})})
    });  
 
    // PUT  /api/productosbase/:productoId  -  Updates a specific product by id
@@ -79,6 +87,10 @@ router.delete('/productosbase/:productoId', (req, res) => {
       .then(() => res.json({ message: `Producto con ${productoId} es eliminado exitosamente.` }))
       .catch(error => res.json(error));
   });
+
+
+
+  
    
    
 module.exports = router;
