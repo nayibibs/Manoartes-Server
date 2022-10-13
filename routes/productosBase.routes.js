@@ -35,7 +35,7 @@ router.post("/productosbase/upload", fileUploader.single("imageUrl"), (req, res,
 
 
 router.post('/productosbase', (req, res) => {
-    console.log(req)
+    
     const { title, description, imageUrl, price, materials } = req.body;
     
     ProductosBase.create({ title, description, imageUrl,price, materials})

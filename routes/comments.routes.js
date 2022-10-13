@@ -6,7 +6,7 @@ const Comments = require('../models/Comments.model');
 
 router.post('/productosbase/:productoId/comments', (req, res) => {
   const { name, description, productoId } = req.body;
-console.log(req.body)
+
   Comments.create({ name, description})
     .then(newComments => {
       return ProductosBase.findByIdAndUpdate(productoId, { $push: { comments: newComments._id } }, {new: true} );
